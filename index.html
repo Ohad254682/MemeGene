@@ -19,9 +19,12 @@
         </canvas>
     </div>
     <div class="tools">
-        <input class="text-line-one" type="text">
-        <button class="increase-font">+</button>
-        <button class="decrease-font">-</button>
+        <input class="text-line" type="text">
+        <button class="increase-font" onclick="onIncreaseFont()">+</button>
+        <button class="decrease-font" onclick="onDecreaseFont()">-</button>
+        <button class="moving-up" onclick="onMoveTextUp()">UP</button>
+        <button class="moving-down" onclick="onMoveTextDown()">Down</button>
+        <button class="switch-lines" onclick="onChangeTextLine()">Switch</button>
     </div>
     <script src="JS/storage.js"></script>
     <script src="JS/service.js"></script>

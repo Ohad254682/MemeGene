@@ -4,9 +4,10 @@ var gImgs = [];
 var gCurrImg;
 var gMeme = {
     selectedImgId: 5,
-    selectedTxtIdx: 0,
-    txts: 
-        { line: 'I never eat Falafel', size: '30px', family:'IMPACT', align: 'center', color: 'red' }
+    txts:
+        [{ line: '', size: 30, family: 'IMPACT', align: 'center', posY: 50, color: 'white' },
+        { line: '', size: 30, family: 'IMPACT', align: 'center', posY: 250, color: 'white' }],
+    currTextLine: 0
 }
 
 function createImgs() {
@@ -33,12 +34,12 @@ function getgMeme() {
     return gMeme;
 }
 
-function setgMeme(key, value) {
-    gMeme[key] = value;
+function setMemeTxt(key,value){
+    gMeme.txts[gMeme.currTextLine][key]=value;
 }
 
-function setgMemeTxt(key,value){
-    gMeme.txts[key]=value;
+function setgMeme(key, value) {
+    gMeme[key] = value;
 }
 
 function setCurrImg(url) {
@@ -61,10 +62,24 @@ function clearCurrImg() {
     removeCurrImgFromStorage('currImg');
 }
 
-function increaseFont(){
-    gMeme.txts.size++;
+function increaseFont() {
+    gMeme.txts[gMeme.currTextLine].size++;
 }
 
-function decreaseFont(){
-    gMeme.txts.size--;
+function decreaseFont() {
+    gMeme.txts[gMeme.currTextLine].size--;
+}
+
+function moveTextDown() {
+    gMeme.txts[gMeme.currTextLine].posY += 10;
+}
+
+
+function moveTextUp() {
+    gMeme.txts[gMeme.currTextLine].posY -= 10;
+}
+
+function changeTextLine() {
+    if (gMeme.currTextLine == 0) gMeme.currTextLine = 1;
+    else gMeme.currTextLine = 0;
 }

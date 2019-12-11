@@ -10,9 +10,7 @@ function init() {
     else {
         renderGallery();
     }
-    renderGallery();
-
-    document.querySelector('.text-line-one').addEventListener('keyup', function () {
+    document.querySelector('.text-line').addEventListener('keyup', function () {
         renderMemeMode(getCurrImg());
     });
 }
@@ -70,25 +68,46 @@ function drawImg(url) {
     }
 }
 
-function onIncreaseFont(){
+function onIncreaseFont() {
     increaseFont();
+    renderMemeMode();
 }
 
-function onDecreaseFont(){
+function onDecreaseFont() {
     decreaseFont();
+    renderMemeMode();
+}
+
+function onMoveTextDown() {
+    moveTextDown();
+    renderMemeMode();
+}
+
+function onMoveTextUp() {
+    moveTextUp();
+    renderMemeMode();
+}
+
+function onChangeTextLine() {
+    changeTextLine();
+    var meme = getgMeme();
+    document.querySelector('.text-line').value = meme.txts[meme.currTextLine].line;
 }
 
 function drawText() {
-    gCtx.save();
     var meme = getgMeme();
-    gCtx.font = `${meme.txts.size} ${meme.txts.family}`;
-    gCtx.textAlign = meme.txts.align;
-    gCtx.fillStyle = 'white';
-    elInputText = document.querySelector('.text-line-one');
-    var textLine1 = elInputText.value;
-    gCtx.fillText(textLine1, 250, 50);
-    gCtx.strokeText(textLine1, 250, 50);
-    gCtx.restore();
+    var inputTxt = document.querySelector('.text-line').value;
+    setMemeTxt('line', inputTxt);
+    meme.txts.forEach(function (txtLine) {
+        gCtx.save();
+        gCtx.font = `${txtLine.size}px ${txtLine.family}`;
+        gCtx.textAlign = txtLine.align;
+        gCtx.fillStyle = txtLine.color;
+        gCtx.fillText(txtLine.line, 250, txtLine.posY);
+        gCtx.strokeText(txtLine.line, 250, txtLine.posY);
+        gCtx.restore();
+    })
+
 }
 
 function showMemeModeContent() {
