@@ -35,7 +35,6 @@ function renderMemeMode(url) {
     hideGallery();
     showMemeModeContent();
     drawImg(url);
-    drawText();
 }
 
 function hideMemeMode() {
@@ -55,14 +54,19 @@ function hideGallery() {
 function drawImg(url) {
     var memeImg = new Image();
     memeImg.src = getCurrImg();
-    if (getCurrImg())
-        gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
+    if (getCurrImg()) {
+        memeImg.onload = () => {
+            gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
+            drawText();
+        };
+    }
     else {
         setCurrImg(url);
         saveData();
         memeImg.src = url;
         memeImg.onload = () => {
             gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
+            drawText();
         };
 
     }
