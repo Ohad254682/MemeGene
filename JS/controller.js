@@ -151,14 +151,14 @@ function drawRect() {
         var rect = document.querySelector('.rectangle');
         rect.style.display='block';
         var inputCharCount = document.querySelector('.text-line').value.length;
-        rect.style.width = (inputCharCount * (meme.txts[meme.currTextLine].size/1.8)) + 'px';
+        rect.style.width = (inputCharCount * (meme.txts[meme.currTextLine].size/1.6)) + 'px';
         rect.style.height = meme.txts[meme.currTextLine].size + 'px';
         rect.style.top = meme.txts[meme.currTextLine].posY + gCanvas.offsetTop -(meme.txts[meme.currTextLine].size) + 'px';
         rect.style.left = 50 + gCanvas.offsetLeft - 10 + 'px';
+        setTimeout(function(){
+            rect.style.display='none';
+        },3000)
     }
-    setTimeout(function(){
-        rect.style.display='none';
-    },3000)
 }
 
 function downloadCanvas(elLink) {

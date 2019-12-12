@@ -111,7 +111,7 @@ function addLine() {
 
 function createLine() {
     if (gMeme.txts.length == 1) {
-        return { line: '', size: 30, family: 'IMPACT', align: 'left', posY: 250, color: 'white' }
+        return { line: '', size: 30, family: 'IMPACT', align: 'left', posY: 500, color: 'white' }
     }
     else if (gMeme.txts.length == 0) {
         return { line: '', size: 30, family: 'IMPACT', align: 'left', posY: 50, color: 'white' }

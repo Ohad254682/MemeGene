@@ -25,40 +25,61 @@
             <img class="about-logo" src="img/croc.jpg">
             <div class="about-content">
                 <p>Crocedi Croc</p>
-                <p>Our beloved mascot and creator of the Crocs shoes brand, dreams one day of having a meme of his own.</p>
+                <p>Our beloved mascot and creator of the Crocs shoes brand, dreams that one day he will have a meme of
+                    his own.</p>
                 <div class="social-links">
-                    <button>1</button><button>2</button><button>3</button>
+                    <button><img src="img/icons/linkedin-logo.png"></button><button><img
+                            src="img/icons/facebook-logo.png"></button><button><img
+                            src="img/icons/github-logo.png"></button>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="meme-body">
+        <div class="meme-section">
+            <div class="canvas-container">
+                <canvas id="my-canvas" width="540" height="550">
+                    Update your browser to enjoy canvas!
+                </canvas>
+            </div>
+            <div class="rectangle"></div>
 
-    <div class="canvas-container">
-        <canvas id="my-canvas" width="500" height="300">
-            Update your browser to enjoy canvas!
-        </canvas>
-    </div>
-    <div class="rectangle"></div>
+            <div class="tools">
 
-    <div class="tools">
-        <input class="text-line" type="text">
-        <button class="increase-font" onclick="onIncreaseFont()">+</button>
-        <button class="decrease-font" onclick="onDecreaseFont()">-</button>
-        <button class="moving-up" onclick="onMoveTextUp()">UP</button>
-        <button class="moving-down" onclick="onMoveTextDown()">Down</button>
-        <button class="switch-lines" onclick="onChangeTextLine()">Switch</button>
-        <button class="add-line" onclick="onAddLine()">ADD</button>
-        <button class="remove-line" onclick="onRemoveLine()">REMOVE</button>
-        <a href="#" onclick="downloadCanvas(this)" download="myCanvas.jpeg">
-                Download Img
-            </a>
-            <input class="file-input btn" type="file" name="image" onchange="onImgInput(event)" />
-            <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-                <input name="img" id="imgData" type="hidden" />
-                <button class="btn" type="submit">Publish</button>
-                <div class="share-container"></div>
-            </form>
+                <div class="main-controls">
+                    <input class="text-line" type="text">
+                    <button class="switch-lines" onclick="onChangeTextLine()"><img
+                            src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                    <button class="add-line" onclick="onAddLine()"><img src="img/icons/add.png"></button>
+                    <button class="remove-line" onclick="onRemoveLine()"><img src="img/icons/trash.png"></button>
+                </div>
+
+                <div class="other-controls">
+                    <button class="increase-font" onclick="onIncreaseFont()"><img
+                            src="img/icons/increase-font-icon.png"></button>
+                    <button class="decrease-font" onclick="onDecreaseFont()"><img
+                            src="img/icons/decrease-font-icon.png"></button>
+                    <button class="moving-up" onclick="onMoveTextUp()"><img src="img/icons/arrow-up.png"></button>
+                    <button class="moving-down" onclick="onMoveTextDown()"><img src="img/icons/arrow-down.png"></button>
+                </div>
+
+                <div class="save-share-btns">
+                    <button class="download-meme-btn"><a href="#" onclick="downloadCanvas(this)" download="myMeme.jpeg">
+                            Download Img
+                        </a></button>
+                    <button class="upload-online"><input class="file-input btn" type="file" name="image"
+                            onchange="onImgInput(event)" />
+                        <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                            <input name="img" id="imgData" type="hidden" />
+                            <button class="btn" type="submit">Publish</button>
+                            <div class="share-container"></div>
+                        </form>
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <footer>
