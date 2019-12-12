@@ -10,14 +10,37 @@
 </head>
 
 <body onload="init()">
+    <header class="navbar"><img class="logo" src="img/logo.png">
+        <ul>
+            <li class="gallery-link" onclick="closeMemeMode()">Gallery</li>
+            <li><a href="#about" onclick="closeMemeMode()">About</a></li>
+        </ul>
+    </header>
+
     <div class="gallery">
     </div>
-    <button class="close-meme-mode" onclick="closeMemeMode()">X</button>
+
+    <div id="about">
+        <div class="about-info">
+            <img class="about-logo" src="img/croc.jpg">
+            <div class="about-content">
+                <p>Crocedi Croc</p>
+                <p>Our beloved mascot and creator of the Crocs shoes brand, dreams one day of having a meme of his own.</p>
+                <div class="social-links">
+                    <button>1</button><button>2</button><button>3</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="canvas-container">
         <canvas id="my-canvas" width="500" height="300">
             Update your browser to enjoy canvas!
         </canvas>
     </div>
+    <div class="rectangle"></div>
+
     <div class="tools">
         <input class="text-line" type="text">
         <button class="increase-font" onclick="onIncreaseFont()">+</button>
@@ -25,7 +48,24 @@
         <button class="moving-up" onclick="onMoveTextUp()">UP</button>
         <button class="moving-down" onclick="onMoveTextDown()">Down</button>
         <button class="switch-lines" onclick="onChangeTextLine()">Switch</button>
+        <button class="add-line" onclick="onAddLine()">ADD</button>
+        <button class="remove-line" onclick="onRemoveLine()">REMOVE</button>
+        <a href="#" onclick="downloadCanvas(this)" download="myCanvas.jpeg">
+                Download Img
+            </a>
+            <input class="file-input btn" type="file" name="image" onchange="onImgInput(event)" />
+            <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                <input name="img" id="imgData" type="hidden" />
+                <button class="btn" type="submit">Publish</button>
+                <div class="share-container"></div>
+            </form>
     </div>
+
+    <footer>
+        <img class="logo" src="img/logo.png">
+        <p>all rights reserved 2019</p>
+    </footer>
+
     <script src="JS/storage.js"></script>
     <script src="JS/service.js"></script>
     <script src="JS/controller.js"></script>

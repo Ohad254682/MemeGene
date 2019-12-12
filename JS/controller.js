@@ -18,7 +18,14 @@ function init() {
 function closeMemeMode() {
     setCurrImg("");
     clearCurrImg();
+    clearInputAndText();
     renderGallery();
+}
+
+function clearInputAndText() {
+    document.querySelector('.text-line').value = '';
+    removeAllTextLines();
+    addLine();
 }
 
 function renderGallery() {
@@ -29,6 +36,7 @@ function renderGallery() {
     })
     elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = strHtml.join('');
+    document.querySelector('#about').style.display = 'flex';
 }
 
 function renderMemeMode(url) {
@@ -40,7 +48,6 @@ function renderMemeMode(url) {
 function hideMemeMode() {
     document.querySelector('.tools').style.display = 'none';
     document.querySelector('.canvas-container').style.display = 'none';
-    document.querySelector('.close-meme-mode').style.display = 'none';
 }
 
 function hideGallery() {
@@ -48,6 +55,7 @@ function hideGallery() {
     elImgs.forEach(function (elImg) {
         elImg.style.display = 'none';
     })
+    document.querySelector('#about').style.display = 'none';
 }
 
 
@@ -74,50 +82,88 @@ function drawImg(url) {
 
 function onIncreaseFont() {
     increaseFont();
-    renderMemeMode();
+    drawImg();
 }
 
 function onDecreaseFont() {
     decreaseFont();
-    renderMemeMode();
+    drawImg();
 }
 
 function onMoveTextDown() {
     moveTextDown();
-    renderMemeMode();
+    drawImg();
 }
 
 function onMoveTextUp() {
     moveTextUp();
-    renderMemeMode();
+    drawImg();
 }
 
 function onChangeTextLine() {
     changeTextLine();
     var meme = getgMeme();
-    document.querySelector('.text-line').value = meme.txts[meme.currTextLine].line;
+    if (meme.txts.length > 0) {
+        document.querySelector('.text-line').value = meme.txts[meme.currTextLine].line;
+    }
+    drawImg();
 }
 
 function drawText() {
     var meme = getgMeme();
     var inputTxt = document.querySelector('.text-line').value;
-    setMemeTxt('line', inputTxt);
-    meme.txts.forEach(function (txtLine) {
-        gCtx.save();
-        gCtx.font = `${txtLine.size}px ${txtLine.family}`;
-        gCtx.textAlign = txtLine.align;
-        gCtx.fillStyle = txtLine.color;
-        gCtx.fillText(txtLine.line, 250, txtLine.posY);
-        gCtx.strokeText(txtLine.line, 250, txtLine.posY);
-        gCtx.restore();
-    })
-
+    if (meme.txts.length > 0) {
+        setMemeTxt('line', inputTxt);
+        meme.txts.forEach(function (txtLine) {
+            gCtx.save();
+            gCtx.font = `${txtLine.size}px ${txtLine.family}`;
+            gCtx.textAlign = txtLine.align;
+            gCtx.fillStyle = txtLine.color;
+            gCtx.strokeStyle = 'black';
+            gCtx.fillText(txtLine.line, 50, txtLine.posY);
+            gCtx.strokeText(txtLine.line, 50, txtLine.posY);
+            gCtx.restore();
+        })
+    }
+    drawRect();
 }
 
 function showMemeModeContent() {
     document.querySelector('.canvas-container').style.display = 'block';
-    document.querySelector('.close-meme-mode').style.display = 'block';
     document.querySelector('.tools').style.display = 'inline';
+}
+
+function onAddLine() {
+    addLine();
+    document.querySelector('.text-line').value = '';
+    drawImg();
+}
+
+function onRemoveLine() {
+    removeLine();
+    onChangeTextLine();
+    drawImg();
+}
+
+function drawRect() {
+    var meme = getgMeme();
+    if (meme.txts.length > 0) {
+        var rect = document.querySelector('.rectangle');
+        rect.style.display='block';
+        var inputCharCount = document.querySelector('.text-line').value.length;
+        rect.style.width = (inputCharCount * (meme.txts[meme.currTextLine].size/1.8)) + 'px';
+        rect.style.height = meme.txts[meme.currTextLine].size + 'px';
+        rect.style.top = meme.txts[meme.currTextLine].posY + gCanvas.offsetTop -(meme.txts[meme.currTextLine].size) + 'px';
+        rect.style.left = 50 + gCanvas.offsetLeft - 10 + 'px';
+    }
+    setTimeout(function(){
+        rect.style.display='none';
+    },3000)
+}
+
+function downloadCanvas(elLink) {
+    const data = gCanvas.toDataURL();
+    elLink.href = data;
 }
 
 
