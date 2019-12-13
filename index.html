@@ -11,13 +11,18 @@
 
 <body onload="init()">
     <header class="navbar"><img class="logo" src="img/logo.png">
+        <button id="menu-btn" onclick="openMenu(event)">☰</button>
         <ul>
-            <li class="gallery-link" onclick="closeMemeMode()">Gallery</li>
+            <div class="top-menu-mobile">
+                <img class="mobile-logo-menu" src="img/logo.png">
+                <button class="close-menu-btn" onclick="closeMenu()">X</button>
+            </div>
+            <li><a href="#gallery-section" class="gallery-link" onclick="closeMemeMode()">Gallery</a></li></li>
             <li><a href="#about" onclick="closeMemeMode()">About</a></li>
         </ul>
     </header>
 
-    <div class="gallery">
+    <div class="gallery" id="gallery-section">
     </div>
 
     <div id="about">
@@ -39,7 +44,7 @@
     <div class="meme-body">
         <div class="meme-section">
             <div class="canvas-container">
-                <canvas id="my-canvas" width="540" height="550">
+                <canvas id="my-canvas"  width="540" height="550">
                     Update your browser to enjoy canvas!
                 </canvas>
             </div>

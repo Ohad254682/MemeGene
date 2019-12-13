@@ -46,8 +46,7 @@ function renderMemeMode(url) {
 }
 
 function hideMemeMode() {
-    document.querySelector('.tools').style.display = 'none';
-    document.querySelector('.canvas-container').style.display = 'none';
+    document.querySelector('.meme-body').style.display = 'none';
 }
 
 function hideGallery() {
@@ -129,8 +128,7 @@ function drawText() {
 }
 
 function showMemeModeContent() {
-    document.querySelector('.canvas-container').style.display = 'block';
-    document.querySelector('.tools').style.display = 'inline';
+    document.querySelector('.meme-body').style.display = 'flex';
 }
 
 function onAddLine() {
@@ -149,21 +147,35 @@ function drawRect() {
     var meme = getgMeme();
     if (meme.txts.length > 0) {
         var rect = document.querySelector('.rectangle');
-        rect.style.display='block';
+        rect.style.display = 'block';
         var inputCharCount = document.querySelector('.text-line').value.length;
-        rect.style.width = (inputCharCount * (meme.txts[meme.currTextLine].size/1.6)) + 'px';
+        rect.style.width = (inputCharCount * (meme.txts[meme.currTextLine].size / 1.6)) + 'px';
         rect.style.height = meme.txts[meme.currTextLine].size + 'px';
-        rect.style.top = meme.txts[meme.currTextLine].posY + gCanvas.offsetTop -(meme.txts[meme.currTextLine].size) + 'px';
+        rect.style.top = meme.txts[meme.currTextLine].posY + gCanvas.offsetTop - (meme.txts[meme.currTextLine].size) + 'px';
         rect.style.left = 50 + gCanvas.offsetLeft - 10 + 'px';
-        setTimeout(function(){
-            rect.style.display='none';
-        },3000)
+
+        setTimeout(function () {
+            rect.style.display = 'none';
+        }, 3000)
     }
 }
 
 function downloadCanvas(elLink) {
     const data = gCanvas.toDataURL();
     elLink.href = data;
+}
+
+function openMenu(ev) {
+    document.querySelector('.navbar ul').style.display = 'flex';
+    document.querySelector('.close-menu-btn').style.display = 'inline';
+    document.querySelector('.mobile-logo-menu').style.display = 'inline';
+    ev.stopPropagation();
+}
+
+function closeMenu() {
+    document.querySelector('.navbar ul').style.display = 'none';
+    document.querySelector('.close-menu-btn').style.display = 'none';
+    document.querySelector('.mobile-logo-menu').style.display = 'none';
 }
 
 
