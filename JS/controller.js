@@ -3,6 +3,7 @@ var gCtx = gCanvas.getContext('2d');
 
 function init() {
     createImgs();
+    setMemeTxt('posY', 50);
     setCurrImg(loadCurrImage());
     if (getCurrImg()) {
         renderMemeMode(getCurrImg());
@@ -13,6 +14,18 @@ function init() {
     document.querySelector('.text-line').addEventListener('keyup', function () {
         renderMemeMode(getCurrImg());
     });
+    resizeCanvas();
+}
+
+function onSetLinePos() {
+    var meme = getgMeme();
+    if (meme.txts.length === 2) {
+        setMemeTxt('posY', gCanvas.height - 50);
+    }
+    else if (meme.txts.length === 1) {
+        setMemeTxt('posY', 50);
+    }
+    else setMemeTxt('posY', meme.txts.length * 50);
 }
 
 function closeMemeMode() {
@@ -21,6 +34,7 @@ function closeMemeMode() {
     clearInputAndText();
     renderGallery();
 }
+
 
 function clearInputAndText() {
     document.querySelector('.text-line').value = '';
@@ -133,6 +147,7 @@ function showMemeModeContent() {
 
 function onAddLine() {
     addLine();
+    onSetLinePos()
     document.querySelector('.text-line').value = '';
     drawImg();
 }
@@ -177,5 +192,35 @@ function closeMenu() {
     document.querySelector('.close-menu-btn').style.display = 'none';
     document.querySelector('.mobile-logo-menu').style.display = 'none';
 }
+
+function onSelectRow(ev) {
+    console.log(ev.clientY);
+    var locationY = ev.clientY - gCanvas.offsetTop;
+    console.log(locationY);
+    var textIndex = findTextIndexByLocation(locationY);
+    if (textIndex === -1) return;
+    setTextLine(textIndex);
+    var meme = getgMeme();
+    if (meme.txts.length > 0) {
+        document.querySelector('.text-line').value = meme.txts[meme.currTextLine].line;
+    }
+    drawImg();
+}
+
+function resizeCanvas() {
+    window.addEventListener('resize', function () {
+        if (window.innerWidth <= 1020 && window.innerWidth > 450) {
+            gCanvas.width = 400;
+            gCanvas.height = 400;
+            drawImg();
+        }
+        else if (window.innerWidth <= 450) {
+            gCanvas.width = 310;
+            gCanvas.height = 330;
+            drawImg();
+        }
+    })
+}
+
 
 

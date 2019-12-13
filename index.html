@@ -17,8 +17,8 @@
                 <img class="mobile-logo-menu" src="img/logo.png">
                 <button class="close-menu-btn" onclick="closeMenu()">X</button>
             </div>
-            <li><a href="#gallery-section" class="gallery-link" onclick="closeMemeMode()">Gallery</a></li></li>
-            <li><a href="#about" onclick="closeMemeMode()">About</a></li>
+            <li><a href="#gallery-section" class="gallery-link" onclick="closeMemeMode();closeMenu()">Gallery</a></li></li>
+            <li><a href="#about" onclick="closeMemeMode();closeMenu()">About</a></li>
         </ul>
     </header>
 
@@ -44,7 +44,7 @@
     <div class="meme-body">
         <div class="meme-section">
             <div class="canvas-container">
-                <canvas id="my-canvas"  width="540" height="550">
+                <canvas id="my-canvas"  width="540" height="550" onclick=onSelectRow(event)>
                     Update your browser to enjoy canvas!
                 </canvas>
             </div>
