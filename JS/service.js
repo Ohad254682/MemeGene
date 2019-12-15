@@ -5,7 +5,7 @@ var gCurrImg;
 var gMeme = {
     selectedImgId: 5,
     txts:
-        [{ line: '', size: 30, family: 'IMPACT', align: 'left', color: 'white' }],
+        [{ line: '', size: 30, family: 'IMPACT', align: 'left', posX: 50, color: 'white' }],
     currTextLine: 0
 }
 
@@ -110,19 +110,20 @@ function addLine() {
 }
 
 function createLine() {
-    return { line: '', size: 30, family: 'IMPACT', align: 'left', color: 'white' }
+    return { line: '', size: 30, family: 'IMPACT', align: 'left', posX: 50, color: 'white' }
 }
 
 function removeAllTextLines() {
     gMeme.txts.splice(0, gMeme.txts.length);
+    gMeme.currTextLine = 0;
 }
 
 function removeLine() {
     gMeme.txts.splice(gMeme.currTextLine, 1);
 }
 
-function findTextIndexByLocation(locationY) {
+function findTextIndexByLocation(locationY, locationX) {
     return gMeme.txts.findIndex(function (txt) {
-        return (locationY >= txt.posY - txt.size) && (locationY <= txt.posY);
-    })
+        return ((locationY >= txt.posY - txt.size) && (locationY <= txt.posY) && (locationX >= txt.posX) && (locationX <= txt.posX + (txt.line.length * (txt.size / 1.6))));
+    });
 }

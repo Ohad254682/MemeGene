@@ -44,7 +44,7 @@ function clearInputAndText() {
     document.querySelector('.text-line').value = '';
     removeAllTextLines();
     addLine();
-    setMemeTxt('posY', 50); 
+    setMemeTxt('posY', 50);
 }
 
 function renderGallery() {
